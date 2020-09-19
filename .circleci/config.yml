@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   initialize:
     docker:
-      - image: circleci/php:7.4-stretch
+      - image: circleci/php:7.4-buster
     working_directory: ~/repo
     steps:
       - checkout
@@ -18,24 +18,25 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
   test:
     docker:
-      - image: circleci/php:7.4-stretch
+      - image: circleci/php:7.4-buster
     working_directory: ~/repo
     steps:
       - run: make test
   qa:
     docker:
-      - image: circleci/php:7.4-stretch
+      - image: circleci/php:7.4-buster
     working_directory: ~/repo
     steps:
       - run: make check
 
 workflows:
   version: 2
-  tests:
+  build-and-test:
     jobs:
       - initialize
-      - test
-  qa:
-    jobs:
-      - initialize
-      - qa
+      - test:
+          requires:
+            - initialize
+      - qa:
+          requires:
+            - initialize
