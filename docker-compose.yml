@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  base:
+    build:
+      context: ./
+      dockerfile: docker/base/Dockerfile
+    image: git-history-base
+  application:
+    build:
+      context: ./
+      dockerfile: docker/dev/Dockerfile
+    image: git-history-dev
+    volumes:
+      - .:/home/git-history/project
