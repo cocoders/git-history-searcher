@@ -22,14 +22,15 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: make test
+      - run: php vendor/bin/phpspec run
+      - run: php bin/phpunit
   qa:
     docker:
       - image: circleci/php:7.4-buster
     working_directory: ~/repo
     steps:
       - checkout
-      - run: make check
+      - run: php vendor/bin/psalm
 
 workflows:
   version: 2
