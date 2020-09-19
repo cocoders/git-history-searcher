@@ -17,16 +17,24 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
   test:
-    - run: make test
+    docker:
+      - image: circleci/php:7.4-stretch
+    working_directory: ~/repo
+    steps:
+      - run: make test
   qa:
-    - run: make check
+    docker:
+      - image: circleci/php:7.4-stretch
+    working_directory: ~/repo
+    steps:
+      - run: make check
 
 workflows:
   version: 2
   tests:
     jobs:
       - initialize
-      - tests
+      - test
   qa:
     jobs:
       - initialize
