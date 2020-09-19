@@ -21,12 +21,14 @@ jobs:
       - image: circleci/php:7.4-buster
     working_directory: ~/repo
     steps:
+      - checkout
       - run: make test
   qa:
     docker:
       - image: circleci/php:7.4-buster
     working_directory: ~/repo
     steps:
+      - checkout
       - run: make check
 
 workflows:
