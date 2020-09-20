@@ -6,6 +6,7 @@ namespace App\Domain;
 
 use App\Domain\Commit\Author;
 use DateTimeImmutable;
+use InvalidArgumentException;
 
 class Commit
 {
@@ -24,6 +25,43 @@ class Commit
         $this->author = $author;
         $this->committedAt = $committedAt;
         $this->comment = $comment;
+    }
+
+    public static function fromString(string $comment): self
+    {
+        $commitMetadata = array_filter(array_map('trim', explode("\n", $comment)));
+
+        $hash = '';
+        $author = '';
+        $date  = '';
+        $comment = [];
+
+        foreach ($commitMetadata as $line) {
+            if (mb_stripos($line, 'commit ') === 0) {
+                $hash = trim(str_ireplace('commit ', '', $line));
+                continue;
+            }
+            if (mb_stripos($line, 'author:',) === 0) {
+                $author = trim(str_ireplace('author:', '', $line));
+                continue;
+            }
+            if (mb_stripos($line, 'date:') === 0) {
+                $date = trim(str_ireplace('date:', '', $line));
+                continue;
+            }
+
+            $comment[] = trim($line);
+        }
+
+        if (!$hash || !$author || !$date) {
+            throw new InvalidArgumentException('Hash date or author not found in parsed commit string');
+        }
+        return self::fromBasicInformation(
+            $hash,
+            Author::fromString($author),
+            new DateTimeImmutable($date),
+            implode("\n", $comment)
+        );
     }
 
     public static function fromBasicInformation(
