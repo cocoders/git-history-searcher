@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\App\Domain\Commit;
+namespace App\Tests\Domain\Commit;
 
 use App\Domain\Commit\Author;
 use PHPUnit\Framework\TestCase;

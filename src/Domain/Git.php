@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
+use Traversable;
+
 interface Git
 {
     /**
@@ -15,7 +17,7 @@ interface Git
      * Contract: We assume that repository is cloned already and if not should @throws RepositoryNotFound exception
      *
      * @throws RepositoryNotFound
-     * @return Commit[]
+     * @return Traversable<Commit>
      */
-    public function findCommitsByCommentFragment(string $repoName, string $searchPhrase): array;
+    public function findCommitsByCommentFragment(string $repoName, string $searchPhrase): Traversable;
 }

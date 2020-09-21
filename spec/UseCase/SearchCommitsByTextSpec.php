@@ -8,6 +8,7 @@ use App\Domain\Commit;
 use App\UseCase\SearchCommitsByText;
 use App\UseCase\SearchCommitsByText\FoundCommits;
 use App\Domain\Git;
+use ArrayIterator;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -44,9 +45,9 @@ class SearchCommitsByTextSpec extends ObjectBehavior
                 md5('git@github.com:cocoders/beer-menu-api.git'),
                 'symfony'
             )
-            ->willReturn([$commit])
+            ->willReturn(new ArrayIterator([$commit]))
         ;
-        $foundCommits->setCommits('symfony', [$commit])->shouldBeCalled();
+        $foundCommits->setCommits('symfony', new ArrayIterator([$commit]))->shouldBeCalled();
         $this->__invoke($command);
     }
 }

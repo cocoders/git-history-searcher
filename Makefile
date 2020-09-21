@@ -23,6 +23,6 @@ phpunit_functional:
 unit_test: ## run unit tests
 unit_test: phpspec phpunit_unit
 test: ## run all tests
-test: unit_test
+test: unit_test phpunit_integration phpunit_functional
 clear: ## clear after docker
 	docker-compose down
