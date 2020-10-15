@@ -99,12 +99,15 @@ class Commit implements JsonSerializable
         return $this->comment;
     }
 
+    /**
+     * @return array{hash: string, author: string, comment: string, committedAt: string}
+     */
     public function jsonSerialize(): array
     {
         return [
             'hash' => $this->hash(),
             'author' => $this->author(),
-            'comments' => $this->comment(),
+            'comment' => $this->comment(),
             'committedAt' => $this->committedAt()->format(DATE_ATOM)
         ];
     }
