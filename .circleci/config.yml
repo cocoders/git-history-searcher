@@ -28,6 +28,7 @@ jobs:
             - v1-dependencies-
       - run: php vendor/bin/phpspec run
       - run: php bin/phpunit
+      - run: vendor/bin/behat
   qa:
     docker:
       - image: circleci/php:7.4-buster
