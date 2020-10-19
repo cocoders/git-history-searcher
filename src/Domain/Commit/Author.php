@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Commit;
 
+use JsonSerializable;
+
 /**
  * @psalm-immutable
  */
-final class Author
+final class Author implements JsonSerializable
 {
     private string $name;
     private string $email;
@@ -51,6 +53,14 @@ final class Author
         throw InvalidAuthorConstructionArgument::forInvalidString($authorEmail);
     }
 
+    /**
+     * @param array{name: string, $email:string} $data
+     */
+    public static function fromArray(array $data): self
+    {
+        return new self($data['name'], $data['email'],);
+    }
+
     public function name(): string
     {
         return $this->name;
@@ -64,5 +74,16 @@ final class Author
     public function __toString(): string
     {
         return sprintf('%s <%s>', $this->name(), $this->email());
+    }
+
+    /**
+     * @return array{name: string, email: string}
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'name' => $this->name(),
+            'email' => $this->email(),
+        ];
     }
 }

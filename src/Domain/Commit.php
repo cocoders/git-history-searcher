@@ -7,8 +7,9 @@ namespace App\Domain;
 use App\Domain\Commit\Author;
 use DateTimeImmutable;
 use InvalidArgumentException;
+use JsonSerializable;
 
-class Commit
+class Commit implements JsonSerializable
 {
     private string $hash;
     private Author $author;
@@ -96,5 +97,18 @@ class Commit
     public function comment(): string
     {
         return $this->comment;
+    }
+
+    /**
+     * @return array{hash: string, author: string, comment: string, committedAt: string}
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'hash' => $this->hash(),
+            'author' => $this->author(),
+            'comment' => $this->comment(),
+            'committedAt' => $this->committedAt()->format(DATE_ATOM)
+        ];
     }
 }
