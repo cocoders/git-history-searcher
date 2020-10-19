@@ -12,4 +12,8 @@ services:
       dockerfile: docker/dev/Dockerfile
     image: git-history-dev
     volumes:
+      - ./docker/dev/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
       - .:/home/git-history/project
+    ports:
+      - "80:80"
+      - "8000:8000"

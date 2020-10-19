@@ -5,7 +5,7 @@ Business Need: I want to search commits by phrase
     Scenario: I send all required parameters and get response status code 200
         When I add "Content-Type" header equal to "application/json"
         And I add "Accept" header equal to "application/json"
-        When I send a "POST" request to "/api/search" with body:
+        And I send a "POST" request to "http://test:123@localhost/api/search" with body:
         """
             {
                 "repositoryName": "https://github.com/cocoders/git-history-searcher.git",
@@ -31,7 +31,7 @@ Business Need: I want to search commits by phrase
     Scenario: I send incomplete parameters and get response 400
         When I add "Content-Type" header equal to "application/json"
         And I add "Accept" header equal to "application/json"
-        When I send a "POST" request to "/api/search" with body:
+        And I send a "POST" request to "http://test:123@localhost/api/search" with body:
         """
             {
 
