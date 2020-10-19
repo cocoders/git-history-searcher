@@ -17,6 +17,7 @@ final class GitTest implements GitInterface
 
     public function findCommitsByCommentFragment(string $repoName, string $searchPhrase): Traversable
     {
+        /** @var array{hash: string, author: array{name: string, email:string}, committedAt: string, comment: string} $basicInformation */
         foreach ($this->exampleCommits() as $basicInformation) {
             yield Commit::fromBasicInformation(
                 $basicInformation['hash'],
@@ -29,9 +30,9 @@ final class GitTest implements GitInterface
     }
 
     /**
-     * @return {
+     * @return array{
      *  hash: string,
-     *  author: {name: string, email: string},
+     *  author: array{name: string, email: string},
      *  committedAt: string,
      *  comment: string}[]
      */

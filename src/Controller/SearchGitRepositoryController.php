@@ -47,10 +47,13 @@ class SearchGitRepositoryController extends AbstractController
             return $this->json($this->formErrorsChecker->getErrors($form), Response::HTTP_BAD_REQUEST);
         }
 
+        /** @var string $phrase */
         $phrase = $form->get('phrase')->getData();
+        /** @var string $repositoryName */
+        $repositoryName = $form->get('repositoryName')->getData();
 
         $this->bus->dispatch(new SearchCommitsByText\Command(
-            $form->get('repositoryName')->getData(),
+            $repositoryName,
             $phrase
         ));
 
