@@ -54,7 +54,7 @@ final class Author implements JsonSerializable
     }
 
     /**
-     * @param array{name: string, $email:string} $data
+     * @param array{name: string, email:string} $data
      */
     public static function fromArray(array $data): self
     {
