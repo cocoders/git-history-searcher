@@ -20,14 +20,10 @@ class SearchGitRepositoryCommand extends Command
      * @var string
      */
     protected static $defaultName = 'app:search-git-repository';
-    private MessageBusInterface $bus;
-    private FoundCommits $foundCommits;
 
-    public function __construct(MessageBusInterface $bus, FoundCommits $foundCommits)
+    public function __construct(private MessageBusInterface $bus, private FoundCommits $foundCommits)
     {
         parent::__construct(null);
-        $this->bus = $bus;
-        $this->foundCommits = $foundCommits;
     }
 
     protected function configure(): void

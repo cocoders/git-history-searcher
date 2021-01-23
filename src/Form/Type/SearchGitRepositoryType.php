@@ -40,7 +40,7 @@ class SearchGitRepositoryType extends AbstractType
             [
                 'method' => 'POST',
                 'csrf_protection' => false,
-                ]
+            ]
         );
     }
 

@@ -17,19 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchGitRepositoryController extends AbstractController
 {
-    private MessageBusInterface $bus;
-    private FoundCommits $foundCommits;
-    private SymfonyFormErrorsChecker $formErrorsChecker;
-
     public function __construct(
-        MessageBusInterface $bus,
-        FoundCommits $foundCommits,
-        SymfonyFormErrorsChecker $formErrorsChecker
-    ) {
-        $this->bus = $bus;
-        $this->foundCommits = $foundCommits;
-        $this->formErrorsChecker = $formErrorsChecker;
-    }
+        private MessageBusInterface $bus,
+        private FoundCommits $foundCommits,
+        private SymfonyFormErrorsChecker $formErrorsChecker
+    ) {}
 
     /**
      * @Route(
