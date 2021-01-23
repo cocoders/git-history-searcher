@@ -3,7 +3,7 @@ help: ## show this help
 up:
 	docker-compose up -d
 install:
-	docker-compose exec application composer install --ignore-platform-reqs
+	docker-compose exec application composer install --ignore-platform-req=php
 build:
 	docker-compose build
 bash: ## run bash inside application container
