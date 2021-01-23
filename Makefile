@@ -3,11 +3,13 @@ help: ## show this help
 up:
 	docker-compose up -d
 install:
-	docker-compose exec application composer install
+	docker-compose exec application composer install --ignore-platform-req=php
+build:
+	docker-compose build
 bash: ## run bash inside application container
 	docker-compose exec application bash
 start: ## start and install dependencies
-start: up install
+start: build up install
 psalm:
 	docker-compose exec application vendor/bin/psalm
 check: ## run QA checks

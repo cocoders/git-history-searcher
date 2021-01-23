@@ -1,4 +1,4 @@
-FROM php:7.4-apache-buster as git-history-base
+FROM php:8.0.1-apache-buster as git-history-base
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y install git bash
 

@@ -8,11 +8,10 @@ projects in "git".
 
 Project is using docker and docker-compose so `docker-compose up -d` should work. 
 For installation of docker and docker-compose please follow: https://docs.docker.com/engine/install/ubuntu/
-and https://docs.docker.com/compose/install/ official docker documentation.
+and https://docs.docker.com/compose/install/ official docker documentation. 
+You can use `make start` - please check out our [Makefile](Makefile) as well.
 
-Please check out our [Makefile](Makefile) as well.
-
-To start project please run `make run` if you do not have "make" you can run `docker-compose up -d`
+To start project please run `make bash` if you do not have "make" you can run `make start`
 and after checking our make file install all needed dependencies (via composer package manager for more 
 info please check [composer website](https://getcomposer.org/)).
 
