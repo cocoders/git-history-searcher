@@ -3,9 +3,9 @@
 Business Need: I want to search commits by phrase
 
     Scenario: I send all required parameters and get response status code 200
-        When I add "Content-Type" header equal to "application/json"
+        Given I add "Content-Type" header equal to "application/json"
         And I add "Accept" header equal to "application/json"
-        And I send a "POST" request to "http://test:123@localhost/api/search" with body:
+        When I send a "POST" request to "http://test:123@localhost/api/search" with body:
         """
             {
                 "repositoryName": "https://github.com/cocoders/git-history-searcher.git",
@@ -29,12 +29,11 @@ Business Need: I want to search commits by phrase
         """
 
     Scenario: I send incomplete parameters and get response 400
-        When I add "Content-Type" header equal to "application/json"
+        Given I add "Content-Type" header equal to "application/json"
         And I add "Accept" header equal to "application/json"
-        And I send a "POST" request to "http://test:123@localhost/api/search" with body:
+        When I send a "POST" request to "http://test:123@localhost/api/search" with body:
         """
             {
-
             }
         """
         Then the response status code should be 400
@@ -45,3 +44,27 @@ Business Need: I want to search commits by phrase
                 "phrase": ["This value should not be blank."]
             }
         """
+
+    Scenario: Invalid login
+        Given I add "Content-Type" header equal to "application/json"
+        And I add "Accept" header equal to "application/json"
+        When I send a "POST" request to "http://test1:123@localhost/api/search" with body:
+        """
+            {
+                "repositoryName": "https://github.com/cocoders/git-history-searcher.git",
+                "phrase": "jobs"
+            }
+        """
+        Then the response status code should be 401
+
+    Scenario: Invalid password
+        Given I add "Content-Type" header equal to "application/json"
+        And I add "Accept" header equal to "application/json"
+        When I send a "POST" request to "http://test:invalidPassword@localhost/api/search" with body:
+        """
+            {
+                "repositoryName": "https://github.com/cocoders/git-history-searcher.git",
+                "phrase": "jobs"
+            }
+        """
+        Then the response status code should be 401
