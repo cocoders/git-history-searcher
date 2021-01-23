@@ -11,22 +11,12 @@ use JsonSerializable;
 
 class Commit implements JsonSerializable
 {
-    private string $hash;
-    private Author $author;
-    private DateTimeImmutable $committedAt;
-    private string $comment;
-
     private function __construct(
-        string $hash,
-        Author $author,
-        DateTimeImmutable $committedAt,
-        string $comment
-    ) {
-        $this->hash = $hash;
-        $this->author = $author;
-        $this->committedAt = $committedAt;
-        $this->comment = $comment;
-    }
+        private string $hash,
+        private Author $author,
+        private DateTimeImmutable $committedAt,
+        private string $comment
+    ) {}
 
     public static function fromString(string $comment): self
     {

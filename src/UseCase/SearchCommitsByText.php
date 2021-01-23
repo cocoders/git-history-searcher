@@ -10,14 +10,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class SearchCommitsByText implements MessageHandlerInterface
 {
-    private Git $git;
-    private FoundCommits $foundCommits;
-
-    public function __construct(Git $git, FoundCommits $foundCommits)
-    {
-        $this->git = $git;
-        $this->foundCommits = $foundCommits;
-    }
+    public function __construct(private Git $git, private FoundCommits $foundCommits)
+    {}
 
     public function __invoke(SearchCommitsByText\Command $command): void
     {

@@ -12,12 +12,8 @@ use Traversable;
 
 final class Git implements GitInterface
 {
-    private string $gitRepositoriesDirectory;
-
-    public function __construct(string $gitRepositoriesDirectory)
-    {
-        $this->gitRepositoriesDirectory = $gitRepositoriesDirectory;
-    }
+    public function __construct(private string $gitRepositoriesDirectory)
+    {}
 
     public function cloneRepository(string $uri, string $repoName): void
     {
