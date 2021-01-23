@@ -23,13 +23,7 @@ class SearchGitRepositoryController extends AbstractController
         private SymfonyFormErrorsChecker $formErrorsChecker
     ) {}
 
-    /**
-     * @Route(
-     *     "/api/search",
-     *     name="search",
-     *     methods={"POST"}
-     * )
-     */
+    #[Route('/api/search', name: 'search', methods: ['POST'])]
     public function search(Request $request): JsonResponse
     {
         $form = $this->createForm(SearchGitRepositoryType::class);
