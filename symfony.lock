@@ -1,4 +1,7 @@
 {
+    "aeon-php/calendar": {
+        "version": "0.14.0"
+    },
     "amphp/amp": {
         "version": "v2.5.0"
     },
@@ -17,8 +20,11 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
-    "behatch/contexts": {
-        "version": "3.3.0"
+    "coduo/php-matcher": {
+        "version": "6.x-dev"
+    },
+    "coduo/php-to-string": {
+        "version": "3.1.0"
     },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
@@ -63,7 +69,7 @@
         "version": "v1.4.0"
     },
     "friends-of-behat/mink-extension": {
-        "version": "v2.4.0"
+        "version": "v2.5.0"
     },
     "friends-of-behat/symfony-extension": {
         "version": "2.0",
@@ -79,9 +85,6 @@
             "features/demo.feature",
             "tests/Behat/DemoContext.php"
         ]
-    },
-    "justinrainbow/json-schema": {
-        "version": "5.2.10"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"

@@ -1,0 +1,9 @@
+security:
+    providers:
+        backend_users:
+            memory:
+                users:
+                    test: { password: '123', roles: ['ROLE_ADMIN'] }
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+

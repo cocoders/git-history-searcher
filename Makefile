@@ -22,9 +22,11 @@ phpunit_integration:
 	docker-compose exec application bin/phpunit --group integration
 phpunit_functional:
 	docker-compose exec application bin/phpunit --group functional
+behat:
+	docker-compose exec application vendor/bin/behat
 unit_test: ## run unit tests
 unit_test: phpspec phpunit_unit
 test: ## run all tests
-test: unit_test phpunit_integration phpunit_functional
+test: unit_test phpunit_integration phpunit_functional behat -fprogress
 clear: ## clear after docker
 	docker-compose down
