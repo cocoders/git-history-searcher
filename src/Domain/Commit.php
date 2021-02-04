@@ -25,23 +25,23 @@ class Commit implements JsonSerializable
         $hash = '';
         $author = '';
         $date  = '';
-        $comment = [];
+        $commentParts = [];
 
         foreach ($commitMetadata as $line) {
-            if (mb_stripos($line, 'commit ') === 0) {
-                $hash = trim(str_ireplace('commit ', '', $line));
+            if (self::lineContains($line, 'commit')) {
+                $hash = self::getContentFromLineWithout($line, 'commit');
                 continue;
             }
-            if (mb_stripos($line, 'author:',) === 0) {
-                $author = trim(str_ireplace('author:', '', $line));
+            if (self::lineContains($line, 'author:')) {
+                $author = self::getContentFromLineWithout($line, 'author:');
                 continue;
             }
-            if (mb_stripos($line, 'date:') === 0) {
-                $date = trim(str_ireplace('date:', '', $line));
+            if (self::lineContains($line, 'date:')) {
+                $date = self::getContentFromLineWithout($line, 'date:');
                 continue;
             }
 
-            $comment[] = trim($line);
+            $commentParts[] = trim($line);
         }
 
         if (!$hash || !$author || !$date) {
@@ -51,7 +51,7 @@ class Commit implements JsonSerializable
             $hash,
             Author::fromString($author),
             new DateTimeImmutable($date),
-            implode("\n", $comment)
+            implode("\n", $commentParts)
         );
     }
 
@@ -67,6 +67,16 @@ class Commit implements JsonSerializable
             $committedAt,
             $comment
         );
+    }
+
+    private static function lineContains(string $line, string $phrase): bool
+    {
+        return mb_stripos($line, sprintf('%s ', $phrase)) === 0;
+    }
+
+    private static function getContentFromLineWithout(string $line, string $phrase): string
+    {
+        return str_ireplace(sprintf('%s ', $phrase), '', $line);
     }
 
     public function hash(): string
