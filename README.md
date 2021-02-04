@@ -11,7 +11,7 @@ For installation of docker and docker-compose please follow: https://docs.docker
 and https://docs.docker.com/compose/install/ official docker documentation. 
 You can use `make start` - please check out our [Makefile](Makefile) as well.
 
-To start project please run `make bash` if you do not have "make" you can run `make start`
+To start project please run `make bash` if you do not have "make" you can check `make start`
 and after checking our make file install all needed dependencies (via composer package manager for more 
 info please check [composer website](https://getcomposer.org/)).
 
