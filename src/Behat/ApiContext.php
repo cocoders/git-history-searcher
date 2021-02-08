@@ -76,13 +76,13 @@ final class ApiContext implements Context
     /**
      * @Then the JSON should be equal to:
      */
-    public function theJsonShouldBeEqualTo(PyStringNode $expectedJson)
+    public function theJsonShouldBeEqualTo(PyStringNode $expectedJson): void
     {
         $matcher = new PHPMatcher();
         $match = $matcher->match($expectedJson->getRaw(), $this->session->getDriver()->getContent());
 
         if (!$match) {
-            throw new \Exception(sprintf('Response does not match %s', $matcher->error()));
+            throw new \Exception(sprintf('Response does not match %s', $matcher->error() ?? ''));
         }
     }
 }
